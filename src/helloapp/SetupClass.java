@@ -16,7 +16,7 @@ public SetupClass(String title) {
 	}
 
 
-
+private player p;
 private TiledMap map;
 private Image image;
 private double x,y;
@@ -27,29 +27,39 @@ private float RectX,RectY;
 public void init(GameContainer container) throws SlickException {
 map= new TiledMap("res/testing.tmx");
 image = new Image("res/Tuscan_Idle_00000.png");
+p = new player("Вася");
+p.spawn(10d,10d);
 
+}
+
+public static void main(String[] args) throws SlickException {
+	AppGameContainer app = new AppGameContainer(new SetupClass("Setup Test"));
+	
+	app.setDisplayMode(800, 600, false);
+	
+	app.start();
 }
 
 public void update(GameContainer container, int delta) throws SlickException {
 	//Player movement
 	if(container.getInput().isKeyDown(Input.KEY_RIGHT))
 	{
-		x -= delta/3.0f;
+		p.moveHorizontal(delta/3.0f);
 	}
 	
 	if(container.getInput().isKeyDown(Input.KEY_LEFT))
 	{
-		x += delta/3.0f;
+		p.moveHorizontal(-delta/3.0f);
 	}
 	
 	if(container.getInput().isKeyDown(Input.KEY_UP))
 	{
-		y += delta/3.0f;
+		p.moveVertical(-delta/3.0f);
 	}
 	
 	if(container.getInput().isKeyDown(Input.KEY_DOWN))
 	{
-		y -= delta/3.0f;
+		p.moveVertical(delta/3.0f);
 	}
 	
 	//RectX += 0.01 * delta;
@@ -61,14 +71,7 @@ public void render(GameContainer container, Graphics g) throws SlickException {
 	
 	map.render((int)x,(int)y,mapX,mapY, 5, 5);
 	
-	image.draw((int)x+RectX,(int)y+RectY,120,60);
-}
-public static void main(String[] args) throws SlickException {
-	AppGameContainer app = new AppGameContainer(new SetupClass("Setup Test"));
-	
-	app.setDisplayMode(800, 600, false);
-	
-	app.start();
+	image.draw((int)p.getX()+RectX,(int)p.getY()+RectY,120,60);
 }
 
 }
