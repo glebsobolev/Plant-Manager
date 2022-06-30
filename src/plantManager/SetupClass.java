@@ -22,6 +22,8 @@ import org.newdawn.slick.util.pathfinding.TileBasedMap;
 
 public class SetupClass extends BasicGame {
 	
+public static float screenOffsetX= 330.0f;
+public static float screenOffsetY = 108.0f;
 public static TiledMap map;
 public static GameMap gameMap;
 public float MouseX, MouseY,TilePositionX,TilePositionY;
@@ -41,60 +43,51 @@ public void init(GameContainer container) throws SlickException {
 map = new TiledMap("res/testing.tmx");
 gameMap = new GameMap(map);
 operator = new Operator();
-float offsetX = 0;
-float offsetY = 0;
-MouseIsReleased = false;
-
 }
+  
 
 public void update(GameContainer container, int delta) throws SlickException {
 	
-	
-	if(container.getInput().isKeyPressed(57)) {
-		//map.setTileId(TilePositionX, TilePositionY, 1, 52);
-	}
-	
+	updateScreenOffset(container);
 	
 
 	MouseX = container.getInput().getAbsoluteMouseX();
 	MouseY = container.getInput().getAbsoluteMouseY();
 	
 	
-	TilePositionX = (MouseX-offsetX)-(MouseY-offsetY)/(1.5f);
-	TilePositionY = (((MouseY-offsetY)/3.0f+(MouseX-offsetX))/1.5f);
-	
 
 	
 }
 
+
+
 public void render(GameContainer container, Graphics g) throws SlickException {
-	int stringXpos = 600;
-	map.render(360, 100,0);
-	operator.go();
-
 	
-	g.drawString("Mouse X = "+MouseX, stringXpos, 15);
-	g.drawString("Mouse Y = "+MouseY, stringXpos, 30);
-	g.drawString("Tile Position X = "+TilePositionX, stringXpos, 45);
-	g.drawString("Tile Position Y = "+TilePositionY, stringXpos, 60);
-
+	map.render((int)SetupClass.screenOffsetX, (int)SetupClass.screenOffsetY,0);
+	operator.doAction();
 	
-	g.drawString("Mouse X pressed "+MouseXpressed, stringXpos, 105);
-	g.drawString("Mouse Y pressed "+MouseYpressed, stringXpos, 120);
+	int stringXpos = 500;
+	int pos=15;
+	g.drawString("Mouse X = "+MouseX, stringXpos, pos+=15);
+	g.drawString("Mouse Y = "+MouseY, stringXpos, pos+=15);
+	g.drawString("Screen offset X "+ screenOffsetX, stringXpos, pos+=15);
+	g.drawString("Screen offset Y "+screenOffsetY, stringXpos, pos+=15);
+	g.drawString("Object offsetX: "+Person.offsetX, stringXpos, pos+=15);
+	g.drawString("Object offsetY: "+Person.offsetY, stringXpos, pos+=15);
 	
-	g.drawString("Mouse Xn pressed "+MouseXn, stringXpos, 135);
-	g.drawString("Mouse Yn pressed "+MouseYn, stringXpos, 150);
-	g.drawString("Object coodrinates: "+"\n"+operator.getCoords(),stringXpos,165);
-	g.drawString("Object render coodrinates: "+"\n"+operator.getNextCoords(),stringXpos,200);
+	g.drawString("Object target: "+"\n"+operator.getTarget(),stringXpos,pos+=45);
+	g.drawString("Object next: "+"\n"+operator.getNextMovement(),stringXpos,pos+=45);
+	g.drawString("Object coodrinates: "+"\n"+operator.getCoords(),stringXpos,pos+=45);
+	g.drawString("Object cartesian coodrinates: "+"\n"+operator.getIsoCoords(),stringXpos,pos+=45);
 	
-	int pos=400;
+	int pos1=400;
 	
 	for(int i=0;i<gameMap.tiles.length;i++) {
 	
-	g.drawString(Arrays.toString(gameMap.tiles[i]), 0, pos);
-	pos+=15;
+	g.drawString(Arrays.toString(gameMap.tiles[i]), 0, pos1);
+	pos1+=15;
 	}
-	pos=0;
+	pos1=0;
 }
 
 
@@ -106,6 +99,25 @@ public static void main(String[] args) throws SlickException {
 	app.start();
 }
 
+private void updateScreenOffset(GameContainer container) {
+	
+	if(container.getInput().isKeyDown(200)) {
+		screenOffsetY-=Constants.screenMovementSpeed;
+	}
+	
+	if(container.getInput().isKeyDown(208)) {
+		screenOffsetY+=Constants.screenMovementSpeed;
+	}
+	
+	if(container.getInput().isKeyDown(203)) {
+		screenOffsetX-=Constants.screenMovementSpeed;
+	}
+	
+	if(container.getInput().isKeyDown(205)) {
+		screenOffsetX+=Constants.screenMovementSpeed;
+	}
+	
+}
 
 
 }

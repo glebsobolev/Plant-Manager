@@ -26,7 +26,7 @@ public class GameMap implements TileBasedMap {
 	@Override
 	public boolean blocked(PathFindingContext arg0, int arg1, int arg2) {
 		
-		if(tiles[arg1][arg2]==81) {
+		if(tiles[arg1][arg2]==84) {
 			return true;
 		}else {
 			return false;

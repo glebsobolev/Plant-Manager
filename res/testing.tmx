@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.5" orientation="isometric" renderorder="left-up" compressionlevel="0" width="12" height="12" tilewidth="64" tileheight="32" infinite="0" nextlayerid="19" nextobjectid="2">
+<map version="1.8" tiledversion="1.8.5" orientation="isometric" renderorder="left-up" compressionlevel="0" width="12" height="12" tilewidth="64" tileheight="32" infinite="0" nextlayerid="20" nextobjectid="2">
  <tileset firstgid="1" name="res/iso-64x64-building" tilewidth="64" tileheight="64" tilecount="80" columns="10">
   <image source="iso-64x64-building.png" width="640" height="512"/>
  </tileset>
@@ -11,12 +11,7 @@
  </tileset>
  <layer id="8" name="floor" width="12" height="12">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAECp2PbQoAIAhD/dMBu/9lasQjsQ8swSZuTitmVi7ZqYWvvZdJfKWljuh94H70mTu9v/Q+xCky9wzlfJnx/tSg1HEH3Om/bMj4462ZnZ7eDbnnBRvSOvN8QAIAAA==
-  </data>
- </layer>
- <layer id="14" name="walls" width="12" height="12" visible="0">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAECmNgGFogkATngtTiUs8ElMOFibUCn/nEmoGsDmYeMo0sj42NrBbEJgYg6yFGPT41AOnyIf5AAgAA
+   H4sIAAAAAAAECp2NQQoAIAgEfWT+/yvlYUBkyewQGzo7upmtwfPDvr6pF77zBxdM5vnXhCNzt96pO1x0f3gcZHapWb1x4+mrpBc75VQz5elmG10/w8RAAgAA
   </data>
  </layer>
 </map>
